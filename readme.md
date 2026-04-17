@@ -264,3 +264,18 @@ Streamlit アプリを起動
 ・ツール統合方法
 
 を比較しながら学習できます。
+
+
+# 出展
+本リポジトリのサンプルドキュメントの一部には、農林水産省が公開している資料を使用しています。
+これらは公開情報をそのまま参照しており、デモンストレーション目的で利用しています。
+
+農林水産省
+https://www.maff.go.jp/
+
+
+The sample documents used in this project are based on publicly available materials from the Ministry of Agriculture, Forestry and Fisheries (MAFF), Government of Japan.
+
+https://www.maff.go.jp/
+
+The documents are used for demonstration purposes only.

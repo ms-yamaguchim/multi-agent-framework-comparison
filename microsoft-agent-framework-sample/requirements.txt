@@ -1,0 +1,7 @@
+agent-framework==1.0.0
+python-dotenv
+azure-ai-documentintelligence==1.0.2
+openai
+azure-core
+azure-identity  
+streamlit

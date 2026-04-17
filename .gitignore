@@ -1,0 +1,21 @@
+environment
+.env
+
+python
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+virtual environment
+.venv/
+venv/
+
+vscode
+.vscode/
+
+streamlit
+.streamlit/
+
+mac
+.DS_Store

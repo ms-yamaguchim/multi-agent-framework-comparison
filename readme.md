@@ -1,33 +1,34 @@
-Multi-Agent AI Sample
+# Multi-Agent AI Sample
 ===
+🌐 Language
 
-# Agent Framework / Semantic Kernel Comparison
+English | [日本語](README_ja.md)
 
-このプロジェクトは 同じマルチエージェントアプリケーションを2つのフレームワークで実装したサンプルです。
 
-## 目的
- - マルチエージェント設計の理解
- - Agent Framework の使い方
- - Semantic Kernel Agent の使い方
- - 2つのフレームワークの違いの理解
+## Agent Framework vs Semantic Kernel
 
-サンプルアプリでは 都道府県の農林水産業・名産品情報を題材にしています。
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Azure OpenAI](https://img.shields.io/badge/Azure-OpenAI-blue)
+![Azure AI](https://img.shields.io/badge/Azure-Document%20Intelligence-blue)
+![Framework](https://img.shields.io/badge/AI-Multi--Agent-green)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-ユーザーの質問に対して
- - 都道府県特定
- - ドキュメント検索
- - OCR解析
- - 検索結果評価
-を行い回答を生成します。
+This repository provides a comparison between Microsoft Agent Framework and Semantic Kernel for building multi-agent AI applications.
 
-<br>
+The sample demonstrates how multiple AI agents collaborate to process documents using Azure OpenAI and Azure AI Document Intelligence.
+# Quick Start
+Install dependencies in each sample directory.
+> pip install -r requirements.txt
 
-# Repository Structure
-multi-agent-sample    
-├─ agent-framework-sample  
-└─ semantic-kernel-sample  
+Run the Streamlit application.
+> streamlit run app.py
 
-両方とも 同じディレクトリ構造で実装されています。
+# Project Structure
+multi-agent-sample
+├─ agent-framework-sample
+└─ semantic-kernel-sample
+
+Both implementations follow the same directory structure.
 
 .  
 ├─ app.py  
@@ -48,12 +49,10 @@ multi-agent-sample
 │   └─ evaluate_instruction.txt  
 │  
 └─ doc  
-    └─ OCR対象ドキュメント 
-
-<br>
+    └─ OCR target documents  
 
 # System Architecture
-両サンプルとも Manager + Worker エージェント構成です。
+Both implementations follow a Manager + Worker agent architecture.
 
 ```
                 User  
@@ -68,18 +67,17 @@ multi-agent-sample
    SearchAgent      EvaluateAgent  
         │  
         ▼  
-Document Intelligence 
+Document Intelligence
 ```
 
+<br>
 
 # Agent Framework vs Semantic Kernel
-
 ## Architecture Comparison
-同じマルチエージェントアプリケーションを2つのフレームワークで実装した場合の構造の違い
+The same multi-agent system is implemented using two frameworks to compare their design approaches.
 
 ### Agent Framework Architecture
-Agent Framework は
-エージェント同士のオーケストレーションを中心とした構造です。
+Agent Framework focuses on agent orchestration.
 
 ```
                 User  
@@ -88,7 +86,7 @@ Agent Framework は
         ┌─────────────────┐  
         │   ManagerAgent  │  
         │   (Triage)      │  
-        │  タスク管理      │  
+        │  Task Control   │  
         └────────┬────────┘  
                  │  
         ┌────────┴────────┐  
@@ -97,18 +95,18 @@ Agent Framework は
    SearchAgent       EvaluateAgent  
         │  
         ▼  
- Document Intelligence  
+ Document Intelligence
 ```
 
-### 特徴
+#### Characteristics
+ - Manager agent controls workflow
+ - Agents communicate directly
+ - Strong for multi-agent orchestration
 
- - Manager Agent がワークフローを管理
- - エージェント同士が直接連携
- - マルチエージェント orchestration が得意
+<br>
 
-## Semantic Kernel Architecture
-Semantic Kernel は
-Kernel + Plugin 中心の構造です。
+### Semantic Kernel Architecture
+Semantic Kernel is built around Kernel + Plugins.
 
 ```
                 User  
@@ -116,11 +114,10 @@ Kernel + Plugin 中心の構造です。
                  ▼  
         ┌─────────────────┐  
         │   TriageAgent   │  
-        │                 │  
         └────────┬────────┘  
                  │  
            ┌─────┴─────┐  
-           │  Kernel   │  
+           │   Kernel  │  
            └─────┬─────┘  
                  │  
         ┌────────┴────────┐  
@@ -129,153 +126,75 @@ Kernel + Plugin 中心の構造です。
    SearchAgent       EvaluateAgent  
         │  
         ▼  
-   DocumentSearchPlugin  
+ DocumentSearchPlugin  
         │  
         ▼  
  Document Intelligence  
 ```
 
-### 特徴
-
- - Kernel が中心
- - 機能は Plugin として実装
- - ツール統合がしやすい
+#### Characteristics
+ - Kernel-centric architecture
+ - Features implemented as plugins
+ - Easy tool integration
 
 ## Conceptual Difference
 ### Agent Framework
-
 Agent  
  ├─ Agent  
  └─ Agent  
 
-### Semantic Kernel
-
+###Semantic Kernel
 Kernel  
  ├─ Agent  
- └─ Plugin(Function)  
-
-## Implementation Differences
-### Agent Framework
-
-エージェント同士が直接連携
-
-ManagerAgent  
-   ↓  
-SearchAgent  
-   ↓  
-EvaluateAgent  
-
-### Semantic Kernel
-
-Kernel + Plugin 構造
-
-Kernel  
-   ↓  
-Agent  
-   ↓  
-Plugin(Function)  
-
-<br>
-
-
-
-## When to Use Which
-### Agent Framework が向くケース
-
- - マルチエージェントシステム
- - エージェントオーケストレーション
- - 複雑なワークフロー
-
-### Semantic Kernel が向くケース
-
- - AIアプリケーション開発
- - ツール統合
- - プラグインベース設計
-
-<br>
-
-
+ └─ Plugin (Function)
+ 
 # Agent Responsibilities
-
 ## TriageAgent
-
-エージェントチームのマネージャー
-
- - ユーザー質問の理解
- - 対象都道府県の特定
- - SearchAgent 呼び出し
- - EvaluateAgent 呼び出し
- - 最終回答生成
+Manager of the agent team.
+### Responsibilities
+ - Understand user questions
+ - Identify the target prefecture
+ - Call SearchAgent
+ - Call EvaluateAgent
+ -  Generate the final answer
 
 ## SearchAgent
-
-検索エージェント
-
- - ドキュメント検索
- - OCR解析
- - 回答生成
+Responsible for document search and analysis.
+### Responsibilities
+ - Document search
+ - OCR processing
+ - Generate candidate answers
 
 ## EvaluateAgent
+Responsible for result validation.
+### Responsibilities
+ - Evaluate answer quality
+ - Identify missing information
 
-評価エージェント
+# Azure Services Used
+## Azure OpenAI
+LLM inference
+## Azure AI Document Intelligence
+OCR document processing
 
- - 検索結果の妥当性判定
- - 不足情報の指摘
+# What This Sample Demonstrates
+ - Multi-agent system design
+ - Microsoft Agent Framework
+ - Semantic Kernel agents
+ - Tool calling with LLMs
+ - OCR + LLM integration
+ - AI application architecture comparison
 
-<br>
+# Why This Sample Matters
+By implementing the same application with two AI frameworks, this repository highlights:
+ - architectural differences
+ - agent implementation approaches
+ - tool integration patterns
+ - This helps developers understand how different frameworks approach multi-agent AI systems.
 
-
-
-
-# 利用Azure サービス
-
-### Azure OpenAI
- - LLM推論
-
-### Azure AI Document Intelligence
- - OCR解析
-
-<br>
-
-# Setup
-## ライブラリのインストール
-各サンプルディレクトリで、
-> pip install -r requirements.txt  
-## Run
-Streamlit アプリを起動
-
-> streamlit run app.py  
-
-
-## このサンプルの範囲
-
- - マルチエージェント設計
- - Agent Framework
- - Semantic Kernel
- - LLMツール呼び出し
- - OCR + LLM統合
- - AIアプリ開発
-
-### Why This Sample Matters
-同じアプリケーションを 2つのAIフレームワークで実装することで
-
-・設計の違い
-・エージェント実装方法
-・ツール統合方法
-
-を比較しながら学習できます。
-
-
-# 出展
-本リポジトリのサンプルドキュメントの一部には、農林水産省が公開している資料を使用しています。
-これらは公開情報をそのまま参照しており、デモンストレーション目的で利用しています。
-
-農林水産省
-https://www.maff.go.jp/
-
-
-The sample documents used in this project are based on publicly available materials from the Ministry of Agriculture, Forestry and Fisheries (MAFF), Government of Japan.
+# Data Source
+Some sample documents are based on publicly available materials from the Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan.
 
 https://www.maff.go.jp/
 
-The documents are used for demonstration purposes only.
+These materials are used for demonstration purposes.

@@ -19,7 +19,6 @@ ADI_KEY = os.getenv("ADI_KEY")  # 無ければManaged ID
 # 実行時に不足している環境変数があれば警告  
 _required_vars = {  
     "AOAI_ENDPOINT": AOAI_ENDPOINT,  
-    "AOAI_API_VERSION": AOAI_API_VERSION,  
     "AOAI_MODEL_NAME": AOAI_MODEL_NAME  
 }  
   

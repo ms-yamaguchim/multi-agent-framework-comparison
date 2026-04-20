@@ -2,7 +2,7 @@ Multi-Agent AI Sample
 ===
 🌐 Language
 
-[English](README.md) | 日本語
+[English](readme.md) | 日本語
 
 
 # Agent Framework / Semantic Kernel Comparison
